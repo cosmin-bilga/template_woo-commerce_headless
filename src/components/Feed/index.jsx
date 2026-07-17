@@ -1,9 +1,12 @@
+import "./index.css";
+
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { fetchProductsThunk } from "../../thunkActionsCreator/productsThunks";
 import { fetchCategoriesThunk } from "../../thunkActionsCreator/categoriesThunks";
 
-export default function Landing() {
+export default function Feed() {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state.filters);
   const { list, loading, error } = useSelector((state) => state.products);
@@ -51,21 +54,19 @@ export default function Landing() {
   };
 
   return (
-    <div>
-      <div className="feed-container">
-        <span ref={feedContainerRef}></span>
-        {items.map((product) => (
-          <div key={product.id}>
-            <p>{product.name}</p>
-            <img src={product.images[0]?.src} alt={product.name} />
-          </div>
-        ))}
-        {hasMore && !loading && (
-          <button onClick={loadMoreProducts}>
-            <span ref={loadMoreRef}>Voir plus (ou déclencher au scroll)</span>
-          </button>
-        )}
-      </div>
+    <div className="feed-container">
+      <span ref={feedContainerRef}></span>
+      {items.map((product) => (
+        <div key={product.id}>
+          <p>{product.name}</p>
+          <img src={product.images[0]?.src} alt={product.name} />
+        </div>
+      ))}
+      {hasMore && !loading && (
+        <div className="load-more">
+          <span ref={loadMoreRef}>Voir plus (ou déclencher au scroll)</span>
+        </div>
+      )}
       {loading && <p>Chargement...</p>}
     </div>
   );

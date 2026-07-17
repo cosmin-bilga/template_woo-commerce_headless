@@ -1,3 +1,5 @@
+import "./index.css";
+
 import Filters from "../Filters";
 
 export default function Header() {

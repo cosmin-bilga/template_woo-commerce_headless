@@ -1,0 +1,20 @@
+.feed-container {
+  height: 90lvh;
+  overflow-y: scroll;
+  position: relative;
+  /* cacher la barre de scroll pour Firefox */
+  scrollbar-width: none;
+  /* cacher la barre de scroll pour Internet Explorer et Edge */
+  -ms-overflow-style: none;
+  /* cacher la barre de scroll pour Chrome, Safari et Opera */
+}
+.feed-container::-webkit-scrollbar {
+  display: none;
+}
+.feed-container .load-more {
+  position: relative;
+}
+.feed-container .load-more span {
+  position: absolute;
+  bottom: 200lvh;
+}/*# sourceMappingURL=index.css.map */
