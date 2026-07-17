@@ -1,5 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
-import { addProductToCart } from "../../thunkActionsCreator/cartThunks";
+import {
+  addProductToCart,
+  deleteProductFromCart,
+  substractProductFromCart,
+} from "../../thunkActionsCreator/cartThunks";
 
 export default function Cart() {
   const items = useSelector((state) => state.cart.items);
@@ -36,8 +40,30 @@ export default function Cart() {
             >
               Ajouter +
             </button>
-            <button onClick={() => {}}>Reduire -</button>
-            <button onClick={() => {}}>Supprimer</button>
+            <button
+              onClick={() => {
+                dispatch(
+                  substractProductFromCart({
+                    itemKey: item.key,
+                    quantity: item.quantity,
+                  }),
+                );
+              }}
+            >
+              Reduire -
+            </button>
+
+            <button
+              onClick={() => {
+                dispatch(
+                  deleteProductFromCart({
+                    itemKey: item.key,
+                  }),
+                );
+              }}
+            >
+              Supprimer
+            </button>
           </li>
         ))}
       </ul>
