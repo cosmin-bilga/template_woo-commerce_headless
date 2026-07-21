@@ -1,15 +1,22 @@
-import "./index.scss";
+import "./index.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilters } from "../../slices/filtersSlice";
 import Filters from "../Filters";
+import { fetchProductsThunk } from "../../thunkActionsCreator/productsThunks";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const search = useSelector((state) => state.filters.search);
+  const { list, loading, error } = useSelector((state) => state.products);
+  //const search = useSelector((state) => state.filters.search);
+  const filters = useSelector((state) => state.filters);
+
+  useEffect(() => {
+    dispatch(fetchProductsThunk({ ...filters, page: 1, per_page: 20 }));
+  }, [filters, dispatch]);
 
   const handleSearchChange = (e) => {
     dispatch(setFilters({ search: e.target.value }));
@@ -32,11 +39,8 @@ export default function Header() {
           </button>
 
           {/* Logo */}
-         <Link to="/" className="header-logo" aria-label="Ecommerce">
-           <img 
-             src="/logo.webp" 
-             alt="Logo" 
-                            />                   
+          <Link to="/" className="header-logo" aria-label="Ecommerce">
+            <img src="/logo.webp" alt="Logo" />
           </Link>
         </div>
 
@@ -48,7 +52,10 @@ export default function Header() {
         />
 
         {/* Navigation */}
-        <nav className={`header-nav ${menuOpen ? "open" : ""}`} aria-hidden={!menuOpen}>
+        <nav
+          className={`header-nav ${menuOpen ? "open" : ""}`}
+          aria-hidden={!menuOpen}
+        >
           <button
             className="header-close"
             onClick={closeMenu}
@@ -57,17 +64,20 @@ export default function Header() {
             ✕
           </button>
 
-          <Link to="/" onClick={closeMenu}>Accueil</Link>
-          <Link to="/categories" onClick={closeMenu}>Catalogue</Link>
+          <Link to="/" onClick={closeMenu}>
+            Accueil
+          </Link>
+          <Link to="/catalogue" onClick={closeMenu}>
+            Catalogue
+          </Link>
         </nav>
 
-       
         <div className="header-actions">
           <input
             type="search"
             className="header-search"
             placeholder="Rechercher..."
-            value={search}
+            value={filters.search}
             onChange={handleSearchChange}
             aria-label="Rechercher"
           />
@@ -83,5 +93,4 @@ export default function Header() {
       </div>
     </header>
   );
-  
 }
