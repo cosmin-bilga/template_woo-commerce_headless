@@ -11,13 +11,6 @@ export const fetchPageThunk = createAsyncThunk(
         );
       }
 
-      const state = thunkAPI.getState();
-      const existing =
-        state.pages && state.pages.items && state.pages.items[slug];
-      if (existing) {
-        return existing;
-      }
-
       const rawParams = typeof params === "string" ? {} : { ...params };
       delete rawParams.slug;
       const cleanParams = Object.entries(rawParams).reduce(
@@ -49,15 +42,21 @@ export const fetchPageThunk = createAsyncThunk(
 
       const item = Array.isArray(data) ? data[0] : data;
       const page = {
-        title: (item.title && (item.title.rendered || item.title)) || null,
-        content:
-          (item.content && (item.content.rendered || item.content)) || null,
+        title: (item.title?.rendered ?? item.title) || "",
+        content: (item.content?.rendered ?? item.content) || "",
         slug: item.slug || slug,
       };
-
       return page;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   },
+  {
+    condition: (params, { getState }) => {
+      const slug = typeof params === "string" ? params : params?.slug;
+      if (!slug) return true;
+      const state = getState();
+      if (state.pages?.items?.[slug]) return false;
+    }
+  }
 );
