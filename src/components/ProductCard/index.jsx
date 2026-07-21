@@ -1,9 +1,6 @@
 import { addProductToCart } from "../../thunkActionsCreator/cartThunks";
 
 export default function ProductCard({ product }) {
-  console.log(product);
-  //console.log(product.prices);
-
   const addProduct = (productId, quantity, variation) => {
     dispatch(
       addProductToCart({
