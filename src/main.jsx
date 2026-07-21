@@ -11,6 +11,7 @@ import { productsSlice } from "./slices/productSlice";
 import { categoriesSlice } from "./slices/categoriesSlice";
 import { filtersSlice } from "./slices/filtersSlice";
 import { userSlice } from "./slices/userSlice";
+import { pagesSlice } from "./slices/pagesSlice";
 
 import { initializeCartThunk } from "./thunkActionsCreator/cartThunks";
 
@@ -30,6 +31,7 @@ const store = configureStore({
     categories: categoriesSlice.reducer,
     products: productsSlice.reducer,
     filters: filtersSlice.reducer,
+    pages: pagesSlice.reducer,
   },
 });
 
