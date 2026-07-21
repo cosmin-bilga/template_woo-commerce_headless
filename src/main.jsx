@@ -17,7 +17,8 @@ import { initializeCartThunk } from "./thunkActionsCreator/cartThunks";
 import Store from "./pages/Store";
 import Header from "./components/Header";
 import Error404 from "./pages/Error404";
-import UserTest from "./components/UserTest";
+import User from "./pages/User";
+import Cart from "./components/Cart";
 
 const store = configureStore({
   reducer: {
@@ -44,7 +45,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Header />
       <Routes>
         <Route path="/" element={<Store />} />
-        <Route path="/test-user" element={<UserTest />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/user" element={<User />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </Router>
