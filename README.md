@@ -33,3 +33,7 @@ add_filter('allowed_http_origins', function($origins) {$origins[] = 'https://mon
     return $origins;
 });
 ```
+
+## Wireframes
+
+[Le lien Figma](https://www.figma.com/design/118Mfb9r0dApZskAojI4c4/Untitled?node-id=0-1&p=f)

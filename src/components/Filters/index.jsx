@@ -49,9 +49,11 @@ export default function Filters() {
       <select value={filters.category} onChange={handleCategoryChange}>
         <option value="">Toutes les catégories</option>
         {categories.map((cat) => (
-          <option key={cat.id} value={cat.id}>
-            {cat.name}
-          </option>
+          <option
+            key={cat.id}
+            value={cat.id}
+            dangerouslySetInnerHTML={{ __html: cat.name }}
+          ></option>
         ))}
       </select>
       <input
