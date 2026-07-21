@@ -19,8 +19,8 @@ import Header from "./components/Header";
 import Error404 from "./pages/Error404";
 import UserTest from "./components/UserTest";
 import MentionsLegales from "./pages/MentionsLegales/MentionsLegales";
-import CGU from "./pages/CGU/CGU";
-import CGV from "./pages/CGV/CGV";
+import CGU from "./pages/CGU";
+import CGV from "./pages/CGV";
 import User from "./pages/User";
 import Cart from "./components/Cart";
 

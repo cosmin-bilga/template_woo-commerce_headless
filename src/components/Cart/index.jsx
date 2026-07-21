@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { CartProduct } from "./CartProduct";
+import { CartProduct } from "../CartProduct";
 import { emptyCartThunk } from "../../thunkActionsCreator/cartThunks";
 
 export default function Cart() {
