@@ -21,6 +21,8 @@ import UserTest from "./components/UserTest";
 import MentionsLegales from "./pages/MentionsLegales/MentionsLegales";
 import CGU from "./pages/CGU/CGU";
 import CGV from "./pages/CGV/CGV";
+import User from "./pages/User";
+import Cart from "./components/Cart";
 
 const store = configureStore({
   reducer: {
@@ -51,6 +53,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/mentions-legales" element={<MentionsLegales />} />
         <Route path="/cgu" element={<CGU />} />
         <Route path="/cgv" element={<CGV />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/user" element={<User />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </Router>
