@@ -1,8 +1,11 @@
+// Importation de la page des détails du produit dans le fichier principal
+import ProductDetails from "./pages/ProductDetails";
 import "./index.css";
 
 import ReactDOM from "react-dom/client";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 
 import { Provider } from "react-redux";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
@@ -70,6 +73,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/panier" element={<Cart />} />
         <Route path="/user" element={<User />} />
         <Route path="*" element={<Error404 />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
       </Routes>
       <Footer />
     </Router>
