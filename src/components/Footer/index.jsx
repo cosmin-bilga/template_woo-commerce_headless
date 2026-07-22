@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Footer.css";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
 
@@ -10,19 +11,20 @@ export default function Footer() {
         <div className="footer_col">
           <h6 className="footer_col-title">À propos</h6>
           <ul className="footer_links">
-            <li><a href="#">Acceuil</a></li>
-            <li><a href="#">Catalogue</a></li>
-            <li><a href="#">Panier</a></li>
+            <li><Link to="/catalogue">Acceuil</Link></li>
+            <li><Link to="/catalogue">Catalogue</Link></li>
+            <li><Link to="/cart">Panier</Link></li>
           </ul>
         </div>
 
         <div className="footer_col">
           <h6 className="footer_col-title">Besoin d'aide</h6>
           <ul className="footer_links">
-            <li><a href="#">Conditions générales d'utilisation</a></li>
-            <li><a href="#">Conditions générales de vente</a></li>
-            <li><a href="#">Mentions légales</a></li>
-            <li><a href="#">Nous contacter</a></li>
+            <li><Link to="/catalogue">Catalogue</Link></li>
+            <li><Link to="/cgu">Conditions générales d'utilisation</Link></li>
+            <li><Link to="/cgv">Conditions générales de vente</Link></li>
+            <li><Link to="/mentions-legales">Mentions légales</Link></li>
+            <li><Link to="/contact">Nous contacter</Link></li>
           </ul>
         </div>
 
