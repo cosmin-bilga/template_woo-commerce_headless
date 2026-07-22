@@ -46,3 +46,31 @@ export const fetchProductsThunk = createAsyncThunk(
     }
   },
 );
+
+// Action pour récupérer un seul produit par son ID
+export const fetchProductByIdThunk = createAsyncThunk(
+  "products/fetchById",
+  async (productId, thunkAPI) => {
+    try {
+      const url = `${import.meta.env.VITE_API_URL}/wp-json/wc/store/v1/products/${productId}`;
+      
+      const response = await fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      
+      if (!response.ok) {
+        // Capture du message d'erreur réel de WooCommerce s'il existe
+        const errorData = await response.json().catch(() => ({}));
+        const serverMessage = errorData.message || "Impossible de récupérer le produit.";
+        throw new Error(serverMessage);
+      }
+      
+      const data = await response.json();
+      return data;
+      
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

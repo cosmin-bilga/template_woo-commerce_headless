@@ -1,5 +1,6 @@
 import { addProductToCart } from "../../thunkActionsCreator/cartThunks";
 import { useDispatch } from "react-redux";
+import { Link, redirect } from "react-router-dom";
 
 export default function ProductCard({ product }) {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ export default function ProductCard({ product }) {
 
   return (
     <div>
-      <a href={"/product/" + product.slug}>
+      <Link to={"/product/" + product.slug}>
         <p>{product.name || "-"}</p>
         <p>Marque: {product.brands?.[0]?.name}</p>
         <img
@@ -26,7 +27,7 @@ export default function ProductCard({ product }) {
           }
           alt={product.name || "photo produit"}
         />
-      </a>
+      </Link>
       <p>
         Prix: {(product.prices.price / 100).toFixed(2) || "-.--"}
         {" " + product.prices.currency_symbol}
