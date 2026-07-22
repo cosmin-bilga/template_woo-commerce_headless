@@ -12,7 +12,7 @@ export default function PageContent({ slug }) {
     dispatch(fetchPageThunk(slug));
   }, [dispatch, slug]);
 
-  if (error) return <p>{error}</p>;
+  if (!page && error) return <p>{error}</p>;
   if (!page || loading) return <p>Chargement…</p>;
 
   const title = page.title ?? "";
