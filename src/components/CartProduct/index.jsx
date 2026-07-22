@@ -27,6 +27,7 @@ export function CartProduct({ item }) {
       ></span>
       <p>{item.quantity}</p>
       <button
+        disabled={item.quantity === item.quantity_limits.maximum}
         onClick={() => {
           dispatch(
             addProductToCart({
