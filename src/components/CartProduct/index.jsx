@@ -17,6 +17,7 @@ export function CartProduct({ item }) {
           item.images?.[0]?.thumbnail ||
           "https://placeholder.pics/svg/300/DEDEDE/555555/Produit%20sans%20illustration"
         }
+        alt={item.name || "produit sans nom"}
       ></img>
       <p>{item.name || "produit sans nom"}</p>
       <span
