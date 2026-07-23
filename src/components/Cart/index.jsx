@@ -1,6 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { CartProduct } from "../CartProduct";
 import { emptyCartThunk } from "../../thunkActionsCreator/cartThunks";
+import { Link } from "react-router-dom";
+import Checkout from "../Checkout";
 
 export default function Cart() {
   const items = useSelector((state) => state.cart.items);
@@ -20,7 +22,7 @@ export default function Cart() {
         ))}
       </ul>
       <button onClick={() => emptyCart()}>Vider Panier</button>
-      <button>Payer</button>
+      <Link to="/checkout">Payer</Link>
     </>
   );
 }

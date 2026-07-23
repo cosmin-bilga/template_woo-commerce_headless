@@ -6,7 +6,6 @@ import ReactDOM from "react-dom/client";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
 import { Provider } from "react-redux";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { cartSlice } from "./slices/cartSlice";
@@ -36,7 +35,7 @@ import CGV from "./pages/CGV";
 import User from "./pages/User";
 import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
-
+import Checkout from "./pages/Checkout";
 
 const store = configureStore({
   reducer: {
@@ -69,7 +68,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     >
       <Header />
       <Routes>
-        {<Route path="/" element={<Home />} /> }
+        {<Route path="/" element={<Home />} />}
         {/* <Route path="/" element={<Store />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -83,6 +82,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="*" element={<Error404 />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
       <Footer />
     </Router>
