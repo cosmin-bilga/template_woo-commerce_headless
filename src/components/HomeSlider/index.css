@@ -6,14 +6,14 @@
 }
 
 .home-slider-viewport {
-  width: 100%;
-  max-width: 900px;
+  max-width: 100%;
   overflow: hidden;
   cursor: grab;
 }
 
 .home-slider-track {
   display: flex;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -21,10 +21,13 @@
   flex-shrink: 0;
   text-align: center;
   opacity: 0.5;
+  transform: scale(0.8);
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
 .home-slider-product.active {
   opacity: 1;
+  transform: scale(1);
 }
 
 .home-slider-product img {

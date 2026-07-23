@@ -6,18 +6,18 @@ import { Link } from "react-router-dom";
 import { fetchProductsThunk } from "../../thunkActionsCreator/productsThunks";
 import { addProductToCart } from "../../thunkActionsCreator/cartThunks";
 
-const CARD_WIDTH = 260;
+const CARD_WIDTH = 160;
 const GAP = 16;
+const VIEWPORT_WIDTH = CARD_WIDTH * 3 + GAP * 2;
 
 export default function HomeSlider() {
   const dispatch = useDispatch();
   const { list, loading } = useSelector((state) => state.products);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [viewportWidth, setViewportWidth] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const viewportRef = useRef(null);
   const dragStartX = useRef(0);
+  const prevIndexRef = useRef(0);
 
   useEffect(() => {
     dispatch(
@@ -29,15 +29,6 @@ export default function HomeSlider() {
       }),
     );
   }, [dispatch]);
-
-  useEffect(() => {
-    const updateWidth = () => {
-      if (viewportRef.current) setViewportWidth(viewportRef.current.offsetWidth);
-    };
-    updateWidth();
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
-  }, []);
 
   const products = list?.data || [];
 
@@ -81,8 +72,15 @@ export default function HomeSlider() {
   if (loading) return <p>Chargement...</p>;
   if (products.length === 0) return null;
 
+  // Le passage du dernier produit au premier (et inversement) ne doit pas
+  // animer tout le long du track : on coupe la transition juste sur ce saut.
+  const wrapped =
+    (prevIndexRef.current === products.length - 1 && currentIndex === 0) ||
+    (prevIndexRef.current === 0 && currentIndex === products.length - 1);
+  prevIndexRef.current = currentIndex;
+
   const baseOffset =
-    viewportWidth / 2 - CARD_WIDTH / 2 - currentIndex * (CARD_WIDTH + GAP);
+    VIEWPORT_WIDTH / 2 - CARD_WIDTH / 2 - currentIndex * (CARD_WIDTH + GAP);
 
   return (
     <div className="home-slider">
@@ -90,7 +88,7 @@ export default function HomeSlider() {
 
       <div
         className="home-slider-viewport"
-        ref={viewportRef}
+        style={{ width: VIEWPORT_WIDTH }}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
         onPointerUp={endDrag}
@@ -100,7 +98,8 @@ export default function HomeSlider() {
           className="home-slider-track"
           style={{
             transform: `translateX(${baseOffset + dragOffset}px)`,
-            transition: isDragging ? "none" : "transform 0.4s ease",
+            transition:
+              isDragging || wrapped ? "none" : "transform 0.4s ease",
           }}
         >
           {products.map((product, index) => (
