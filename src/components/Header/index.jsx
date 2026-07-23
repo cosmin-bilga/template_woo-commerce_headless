@@ -1,23 +1,16 @@
 import "./index.css";
-import { Link, redirect } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilters } from "../../slices/filtersSlice";
 import { useNavigate } from "react-router-dom";
-import { fetchProductsThunk } from "../../thunkActionsCreator/productsThunks";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { list, loading, error } = useSelector((state) => state.products);
-  //const search = useSelector((state) => state.filters.search);
   const filters = useSelector((state) => state.filters);
-
-  useEffect(() => {
-    dispatch(fetchProductsThunk({ ...filters, page: 1, per_page: 20 }));
-  }, [filters, dispatch]);
 
   const handleSearchChange = (e) => {
     dispatch(setFilters({ search: e.target.value }));
