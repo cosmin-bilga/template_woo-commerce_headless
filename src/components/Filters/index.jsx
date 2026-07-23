@@ -25,7 +25,7 @@ export default function Filters() {
   // };
 
   const handleCategoryChange = (e) => {
-    dispatch(setFilters({ category: e.target.value }));
+    dispatch(setFilters({ category: e.target.value, search: "" }));
   };
 
   const handleSortChange = (e) => {
