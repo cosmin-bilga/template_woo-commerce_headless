@@ -10,23 +10,29 @@ function stripHtml(value = "") {
 
 export const fetchBlogDataThunk = createAsyncThunk(
   "blog/fetchData",
-  async (_, thunkAPI) => {
+  async (params = {}, thunkAPI) => {
     try {
+      const page = Number(params.page || 1);
+      const perPage = Number(params.perPage || 6);
+
       const [postsResponse, categoriesResponse] = await Promise.all([
         fetch(
-          `${import.meta.env.VITE_API_URL}/wp-json/wp/v2/posts?per_page=20&_fields=id,date,title,excerpt,link,categories,slug`,
+          `${import.meta.env.VITE_API_URL}/wp-json/wp/v2/posts?page=${page}&per_page=${perPage}&_fields=id,date,title,excerpt,link,categories,slug`,
         ),
-        fetch(
-          `${import.meta.env.VITE_API_URL}/wp-json/wp/v2/categories?per_page=100`,
-        ),
+        page === 1
+          ? fetch(
+              `${import.meta.env.VITE_API_URL}/wp-json/wp/v2/categories?per_page=100`,
+            )
+          : Promise.resolve(null),
       ]);
 
-      if (!postsResponse.ok || !categoriesResponse.ok) {
+      if (!postsResponse.ok) {
         throw new Error("Impossible de charger les articles du blog.");
       }
 
       const postsData = await postsResponse.json();
-      const categoriesData = await categoriesResponse.json();
+      const categoriesData =
+        page === 1 ? await categoriesResponse.json() : null;
 
       const normalizedPosts = postsData.map((post) => ({
         ...post,
@@ -35,18 +41,22 @@ export const fetchBlogDataThunk = createAsyncThunk(
       }));
 
       const groupedCategories = categoriesData
-        .filter((category) => category.count > 0)
-        .map((category) => ({
-          ...category,
-          posts: normalizedPosts.filter((post) =>
-            post.categories.includes(category.id),
-          ),
-        }))
-        .filter((category) => category.posts.length > 0);
+        ? categoriesData
+            .filter((category) => category.count > 0)
+            .map((category) => ({
+              ...category,
+              posts: normalizedPosts.filter((post) =>
+                post.categories.includes(category.id),
+              ),
+            }))
+            .filter((category) => category.posts.length > 0)
+        : [];
 
       return {
         posts: normalizedPosts,
         categories: groupedCategories,
+        page,
+        hasMore: postsData.length === perPage,
       };
     } catch (error) {
       return thunkAPI.rejectWithValue(
