@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Seo from "../../components/seo.jsx";
+import Seo from "../../components/Seo";
 
 // Importation des actions (thunks)
 import { fetchProductByIdThunk } from "../../thunkActionsCreator/productsThunks";
@@ -56,21 +56,29 @@ export default function ProductDetails() {
     <div className="product-page-wrapper">
       <Seo
         title={productToDisplay.name}
-        description={productToDisplay.short_description || productToDisplay.description}
+        description={
+          productToDisplay.short_description || productToDisplay.description
+        }
         image={productToDisplay.images?.[0]?.src}
         url={window.location.href}
         jsonLd={{
           "@context": "https://schema.org/",
           "@type": "Product",
-          "name": productToDisplay.name,
-          "description": productToDisplay.short_description || productToDisplay.description,
-          "image": productToDisplay.images?.[0]?.src,
-          "offers": {
+          name: productToDisplay.name,
+          description:
+            productToDisplay.short_description || productToDisplay.description,
+          image: productToDisplay.images?.[0]?.src,
+          offers: {
             "@type": "Offer",
-            "priceCurrency": productToDisplay.prices?.currency_code || "EUR",
-            "price": productToDisplay.prices?.price ? (parseFloat(productToDisplay.prices.price) / 100).toFixed(2) : undefined,
-            "availability": productToDisplay.stock_status === "instock" ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-          }
+            priceCurrency: productToDisplay.prices?.currency_code || "EUR",
+            price: productToDisplay.prices?.price
+              ? (parseFloat(productToDisplay.prices.price) / 100).toFixed(2)
+              : undefined,
+            availability:
+              productToDisplay.stock_status === "instock"
+                ? "https://schema.org/InStock"
+                : "https://schema.org/OutOfStock",
+          },
         }}
       />
       <button className="back-to-store-btn" onClick={() => navigate(-1)}>
@@ -104,7 +112,8 @@ export default function ProductDetails() {
             className="short-description-box"
             dangerouslySetInnerHTML={{
               __html:
-                productToDisplay.short_description || productToDisplay.description ||
+                productToDisplay.short_description ||
+                productToDisplay.description ||
                 "<p>Aucune introduction disponible.</p>",
             }}
           />
