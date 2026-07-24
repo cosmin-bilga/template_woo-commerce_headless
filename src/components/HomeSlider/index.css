@@ -24,12 +24,10 @@
   transform: scale(0.8);
   transition: transform 0.4s ease, opacity 0.4s ease;
 }
-
 .home-slider-product.active {
   opacity: 1;
   transform: scale(1);
 }
-
 .home-slider-product img {
   max-width: 100%;
   pointer-events: none;
@@ -43,10 +41,8 @@
   .home-slider-viewport {
     cursor: default;
   }
-
   .home-slider-buttons {
     display: flex;
     gap: 1rem;
   }
-}
-/*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */
