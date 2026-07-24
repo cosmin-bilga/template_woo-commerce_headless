@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Checkout() {
+  const token = useSelector((state) => state.user.token);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -26,11 +28,17 @@ export default function Checkout() {
 
     try {
       // 1. Récupération du panier pour obtenir Nonce + Cart-Token
+      // Le token JWT est transmis pour que WooCommerce identifie le client
+      // connecté sur cette route Store API (sinon le nonce/panier reste
+      // celui d'un invité, même utilisateur authentifié côté JWT).
       const cartResponse = await fetch(
         `${import.meta.env.VITE_API_URL}/wp-json/wc/store/v1/cart`,
         {
           method: "GET",
           credentials: "include",
+          headers: {
+            ...(token && { Authorization: `Bearer ${token}` }),
+          },
         },
       );
 
@@ -55,6 +63,7 @@ export default function Checkout() {
             "Content-Type": "application/json",
             Nonce: nonce,
             ...(cartToken && { "Cart-Token": cartToken }),
+            ...(token && { Authorization: `Bearer ${token}` }),
           },
           credentials: "include",
           body: JSON.stringify({

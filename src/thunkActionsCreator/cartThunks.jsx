@@ -1,12 +1,27 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setCart, setNonce } from "../slices/cartSlice";
 
+const buildCartHeaders = (thunkAPI, currentNonce) => {
+  const token = thunkAPI.getState().user.token;
+  return {
+    "Content-Type": "application/json",
+    ...(currentNonce && { Nonce: currentNonce }),
+    ...(token && { Authorization: `Bearer ${token}` }),
+  };
+};
+
 export const initializeCartThunk = createAsyncThunk(
   "cart/initialize",
   async (_, thunkAPI) => {
     try {
+      const token = thunkAPI.getState().user.token;
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/wp-json/wc/store/v1/cart`,
+        {
+          headers: {
+            ...(token && { Authorization: `Bearer ${token}` }),
+          },
+        },
       );
       if (!response.ok) {
         throw new Error("Impossible de récupérer le panier initial.");
@@ -39,10 +54,7 @@ export const emptyCartThunk = createAsyncThunk(
         `${import.meta.env.VITE_API_URL}/wp-json/wc/store/v1/cart/items`,
         {
           method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Nonce: currentNonce,
-          },
+          headers: buildCartHeaders(thunkAPI, currentNonce),
         },
       );
       if (!response.ok) {
@@ -77,10 +89,7 @@ export const addProductToCart = createAsyncThunk(
         `${import.meta.env.VITE_API_URL}/wp-json/wc/store/v1/cart/add-item`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Nonce: currentNonce,
-          },
+          headers: buildCartHeaders(thunkAPI, currentNonce),
           body: JSON.stringify({ id: productId, quantity, variation }),
         },
       );
@@ -118,10 +127,7 @@ export const deleteProductFromCart = createAsyncThunk(
         `${import.meta.env.VITE_API_URL}/wp-json/wc/store/v1/cart/remove-item`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Nonce: currentNonce,
-          },
+          headers: buildCartHeaders(thunkAPI, currentNonce),
           body: JSON.stringify({ key: itemKey }),
         },
       );
@@ -162,10 +168,7 @@ export const substractProductFromCart = createAsyncThunk(
         url = `${import.meta.env.VITE_API_URL}/wp-json/wc/store/v1/cart/update-item`;
         body = {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Nonce: currentNonce,
-          },
+          headers: buildCartHeaders(thunkAPI, currentNonce),
           body: JSON.stringify({
             key: itemKey,
             quantity: quantity - 1,
@@ -175,10 +178,7 @@ export const substractProductFromCart = createAsyncThunk(
         url = `${import.meta.env.VITE_API_URL}/wp-json/wc/store/v1/cart/remove-item`;
         body = {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Nonce: currentNonce,
-          },
+          headers: buildCartHeaders(thunkAPI, currentNonce),
           body: JSON.stringify({ key: itemKey }),
         };
       }
