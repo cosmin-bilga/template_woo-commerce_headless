@@ -16,7 +16,7 @@ import { filtersSlice } from "./slices/filtersSlice";
 import { userSlice } from "./slices/userSlice";
 import { pagesSlice } from "./slices/pagesSlice";
 import { blogSlice } from "./slices/blogSlice";
-import Seo from "./components/seo";
+import Seo from "./components/Seo";
 
 import { initializeCartThunk } from "./thunkActionsCreator/cartThunks";
 import {
