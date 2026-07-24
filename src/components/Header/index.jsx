@@ -68,6 +68,9 @@ export default function Header() {
           <Link to="/catalogue" onClick={closeMenu}>
             Catalogue
           </Link>
+          <Link to="/blog" onClick={closeMenu}>
+            Blog
+          </Link>
         </nav>
 
         <div className="header-actions">

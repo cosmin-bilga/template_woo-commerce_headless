@@ -14,6 +14,7 @@ import { categoriesSlice } from "./slices/categoriesSlice";
 import { filtersSlice } from "./slices/filtersSlice";
 import { userSlice } from "./slices/userSlice";
 import { pagesSlice } from "./slices/pagesSlice";
+import { blogSlice } from "./slices/blogSlice";
 
 import { initializeCartThunk } from "./thunkActionsCreator/cartThunks";
 import {
@@ -36,6 +37,7 @@ import User from "./pages/User";
 import Cart from "./pages/Cart";
 import Contact from "./pages/Contact";
 import Checkout from "./pages/Checkout";
+import Blog from "./pages/Blog";
 
 const store = configureStore({
   reducer: {
@@ -45,6 +47,7 @@ const store = configureStore({
     products: productsSlice.reducer,
     filters: filtersSlice.reducer,
     pages: pagesSlice.reducer,
+    blog: blogSlice.reducer,
   },
 });
 
@@ -83,6 +86,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/contact" element={<Contact />} />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/blog" element={<Blog />} />
       </Routes>
       <Footer />
     </Router>
