@@ -3,7 +3,7 @@ import ProductDetails from "./pages/ProductDetails";
 import "./index.css";
 
 import ReactDOM from "react-dom/client";
-import {HelmetProvider} from "react-helmet-async";
+import { HelmetProvider } from "react-helmet-async";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -16,6 +16,7 @@ import { filtersSlice } from "./slices/filtersSlice";
 import { userSlice } from "./slices/userSlice";
 import { pagesSlice } from "./slices/pagesSlice";
 import { blogSlice } from "./slices/blogSlice";
+import Seo from "./components/seo";
 
 import { initializeCartThunk } from "./thunkActionsCreator/cartThunks";
 import {
@@ -69,30 +70,32 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           v7_startTransition: true,
           v7_relativeSplatPath: true,
         }}
-      //basename="/ecom"
-    >
-      <Header />
-      <Routes>
-        {<Route path="/" element={<Home />} />}
-        {/* <Route path="/" element={<Store />} /> */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/catalogue" element={<Store />} />
-        <Route path="/mentions-legales" element={<MentionsLegales />} />
-        <Route path="/cgu" element={<CGU />} />
-        <Route path="/cgv" element={<CGV />} />
-        <Route path="/panier" element={<Cart />} />
-        <Route path="/user" element={<User />} />
-        <Route path="*" element={<Error404 />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/product/:id" element={<ProductDetails />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/blog" element={<Blog />} />
-      </Routes>
-      <Footer />
-    </Router>
-  </Provider>
+        //basename="/ecom"
+      >
+        <Header />
+        <Seo title="Woo Commerce" />
+
+        <Routes>
+          {<Route path="/" element={<Home />} />}
+          {/* <Route path="/" element={<Store />} /> */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/catalogue" element={<Store />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
+          <Route path="/cgu" element={<CGU />} />
+          <Route path="/cgv" element={<CGV />} />
+          <Route path="/panier" element={<Cart />} />
+          <Route path="/user" element={<User />} />
+          <Route path="*" element={<Error404 />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/blog" element={<Blog />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </Provider>
   </HelmetProvider>,
   /* </React.StrictMode>, */
 );

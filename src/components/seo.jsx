@@ -2,8 +2,7 @@ import { Helmet } from "react-helmet-async";
 
 const SITE_NAME = "[Nom de la boutique]";
 const DEFAULT_TITLE = "[Nom de la boutique]";
-const DEFAULT_DESCRIPTION =
-  "[Description par défaut du site, une phrase].";
+const DEFAULT_DESCRIPTION = "[Description par défaut du site, une phrase].";
 
 const stripHtml = (value) =>
   String(value || "")
@@ -23,7 +22,7 @@ function Seo({
 }) {
   const cleanTitle = stripHtml(title);
   const cleanDescription = stripHtml(description);
-  const finalTitle = cleanTitle ? `${cleanTitle} | ${SITE_NAME}` : DEFAULT_TITLE;
+  const finalTitle = cleanTitle ? `${cleanTitle}` : DEFAULT_TITLE;
   const finalDescription = cleanDescription || DEFAULT_DESCRIPTION;
   const cardType = image ? "summary_large_image" : "summary";
 
