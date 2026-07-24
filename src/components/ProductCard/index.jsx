@@ -19,7 +19,7 @@ export default function ProductCard({ product }) {
   return (
     <div className="product-card">
       <Link to={"/product/" + product.slug}>
-        <p>{product.name || "-"}</p>
+        <p dangerouslySetInnerHTML={{ __html: product.name || "-" }} />
         <p>Marque: {product.brands?.[0]?.name}</p>
         <img
           src={
