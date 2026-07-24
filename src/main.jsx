@@ -23,6 +23,7 @@ import {
   fetchCurrentCustomerThunk,
   fetchCurrentUserOrdersThunk,
 } from "./thunkActionsCreator/userThunks";
+import { cartIdentityListener } from "./store/cartIdentityListener";
 
 import Store from "./pages/Store";
 import Home from "./pages/Home";
@@ -50,6 +51,8 @@ const store = configureStore({
     pages: pagesSlice.reducer,
     blog: blogSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().prepend(cartIdentityListener.middleware),
 });
 
 store.dispatch(initializeCartThunk());
