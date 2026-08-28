@@ -1,13 +1,18 @@
+import "./index.css";
+
 import HomeSlider from "../../components/HomeSlider";
 import PageContent from "../../components/PageContent";
-import DeleteAccountButton from "../../components/DeleteAccountButton";
+import Advantages from "../../components/Advantages";
 
 export default function Home() {
   return (
-    <main className="home">
+    <div className="home">
       <PageContent slug="home" />
       <HomeSlider />
-      <PageContent slug="a-propos" />
-    </main>
+      <div className="apropos-wrapper">
+        <PageContent slug="a-propos" />
+        <Advantages />
+      </div>
+    </div>
   );
 }

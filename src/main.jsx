@@ -12,6 +12,7 @@ import {
   fetchCurrentUserOrdersThunk,
 } from "./thunkActionsCreator/userThunks";
 import { fetchSiteThunk } from "./thunkActionsCreator/siteThunk";
+import { fetchWishlistThunk } from "./thunkActionsCreator/wishlistThunks";
 
 import Home from "./pages/Home";
 import Store from "./pages/Store";
@@ -45,6 +46,7 @@ if (store.getState().user.token) {
   store.dispatch(fetchCurrentUserThunk());
   store.dispatch(fetchCurrentCustomerThunk());
   store.dispatch(fetchCurrentUserOrdersThunk());
+  store.dispatch(fetchWishlistThunk());
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(

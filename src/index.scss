@@ -30,6 +30,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  //outline: 1px solid red;
 }
 // html {
 //   scroll-behavior: smooth;
@@ -173,7 +174,7 @@ h3 {
 
 h4 {
   font-size: 4.5vw;
-    font-family: var(--font-body);
+  font-family: var(--font-body);
   margin-bottom: 2.5vw;
   @media screen and (aspect-ratio > 1/1) {
     font-size: 1.4vw;
