@@ -1,5 +1,4 @@
 .feed-container {
-  //height: 90lvh;
   overflow-y: scroll;
   position: relative;
   /* cacher la barre de scroll pour Firefox */
@@ -11,6 +10,12 @@
   flex-wrap: wrap;
   justify-content: center;
   min-height: 50lvh;
+  gap: 3vw;
+
+  @media screen and (aspect-ratio > 1/1) {
+    gap: 0;
+  }
+
   &::-webkit-scrollbar {
     display: none;
   }
