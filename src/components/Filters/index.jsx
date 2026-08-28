@@ -84,7 +84,7 @@ export default function Filters() {
                 ></option>
               ))}
             </select>
-            <PriceRangeSlider />
+            <PriceRangeSlider onApply={() => setIsOpen(false)} />
 
             <select
               value={`${filters.orderby}-${filters.order}`}
