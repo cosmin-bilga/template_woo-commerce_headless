@@ -11,9 +11,14 @@
   justify-content: center;
   min-height: 50lvh;
   gap: 3vw;
+  margin-bottom: 3vw;
 
   @media screen and (aspect-ratio > 1/1) {
     gap: 0;
+  }
+
+  @media screen and (aspect-ratio > 2.6/1) {
+    margin-bottom: 2vw;
   }
 
   &::-webkit-scrollbar {

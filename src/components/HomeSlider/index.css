@@ -100,6 +100,9 @@
   opacity: 1;
   transition: 1s;
   display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 @media screen and (aspect-ratio > 1/1) {
   .sliderContainer .arrowLeft {
