@@ -10,7 +10,7 @@ export const fetchSpotlightProductsThunk = createAsyncThunk(
     try {
       const page = params.page ? parseInt(params.page, 10) : 1;
       const perPage = params.per_page ? parseInt(params.per_page, 10) : 20;
-      const url = `${import.meta.env.VITE_API_URL}/wp-json/wc/store/v1/products?featured=true`;
+      const url = `${import.meta.env.VITE_API_URL}/wp-json/custom/v1/products?featured=true`;
       const response = await fetch(url, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
