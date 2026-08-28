@@ -4,7 +4,7 @@
   border: 1px solid var(--dark-color);
   box-shadow: 0 2px 4px rgba(40, 68, 193, 0.1);
   transition: transform 0.2s ease-in-out;
-  width: 47%;
+  width: 45%;
   overflow: hidden;
   position: relative;
   height: 60lvh;
@@ -13,6 +13,8 @@
   @media screen and (aspect-ratio > 1/1) {
     width: 18%;
     height: 28vw;
+    margin: 0.8%;
+    // margin-top: 5vw;
   }
   @media screen and (aspect-ratio > 2.6/1) {
     width: 18%;
@@ -147,11 +149,5 @@
     border: 1px solid var(--dark-color);
     border-radius: 1vw;
     padding-left: 10%;
-  }
-
-  @media screen and (aspect-ratio > 1/1) {
-    /*   width: 30%; */
-    margin: 0.8%;
-    margin-top: 5vw;
   }
 }

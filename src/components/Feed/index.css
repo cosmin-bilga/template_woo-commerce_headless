@@ -10,6 +10,12 @@
   flex-wrap: wrap;
   justify-content: center;
   min-height: 50lvh;
+  gap: 3vw;
+}
+@media screen and (aspect-ratio > 1/1) {
+  .feed-container {
+    gap: 0;
+  }
 }
 .feed-container::-webkit-scrollbar {
   display: none;
