@@ -1,6 +1,7 @@
+import "./index.css";
+
 import HomeSlider from "../../components/HomeSlider";
 import PageContent from "../../components/PageContent";
-import DeleteAccountButton from "../../components/DeleteAccountButton";
 import Advantages from "../../components/Advantages";
 
 export default function Home() {
