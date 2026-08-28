@@ -182,7 +182,8 @@
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary-color) 15%, transparent);
 }
 .filters .content select {
-  appearance: none;
+  -moz-appearance: none;
+       appearance: none;
   -webkit-appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='none' stroke='%230f172a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
@@ -206,8 +207,6 @@
   padding-left: 2vw;
   padding-right: 2vw;
   cursor: text;
-  -moz-appearance: textfield;
-  appearance: textfield;
 }
 @media screen and (aspect-ratio > 1/1) {
   .filters .content input[type=number] {
@@ -226,6 +225,14 @@
 .filters .content input[type=number]::-webkit-outer-spin-button, .filters .content input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+.filters .content input[type=number] {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+          appearance: textfield;
+}
+.filters .content input[type=number]::-moz-placeholder {
+  color: color-mix(in srgb, var(--dark-color) 40%, transparent);
 }
 .filters .content input[type=number]::placeholder {
   color: color-mix(in srgb, var(--dark-color) 40%, transparent);

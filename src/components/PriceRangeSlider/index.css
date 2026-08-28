@@ -1,4 +1,5 @@
 .price-range-slider {
+  width: -moz-max-content;
   width: max-content;
   display: flex;
   align-items: center;
@@ -74,7 +75,8 @@
   outline: none !important; /* Supprime le contour bleu/gris au clic */
   box-shadow: none !important;
   -webkit-appearance: none !important;
-  appearance: none !important;
+  -moz-appearance: none !important;
+       appearance: none !important;
   pointer-events: none;
   touch-action: none;
 }
