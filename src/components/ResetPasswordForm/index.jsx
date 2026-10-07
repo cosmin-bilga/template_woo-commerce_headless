@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 
 import { updateModalProps } from "../../slices/modalSlice";
 
+import "./index.css";
+
 export default function ResetPasswordForm() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -23,7 +25,7 @@ export default function ResetPasswordForm() {
   };
 
   return (
-    <>
+    <div className="resetPassword">
       <h1>Mot de passe oublié</h1>
       <p className="auth-modal__subtitle">
         Recevez un lien pour réinitialiser votre mot de passe
@@ -58,6 +60,6 @@ export default function ResetPasswordForm() {
           Retour à la connexion
         </button>
       </p>
-    </>
+    </div>
   );
 }

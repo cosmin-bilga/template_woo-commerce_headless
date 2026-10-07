@@ -22,7 +22,7 @@ import Cart from "./pages/Cart";
 import Success from "./pages/Success";
 import NewPassword from "./pages/NewPassword";
 import Profile from "./pages/Profile";
-import Wishlist from "./pages/Wishlist"; // TEMP: wishlist testing, remove before commit
+import Wishlist from "./pages/Wishlist";
 import BlogPage from "./pages/Blog";
 import SinglePost from "./pages/SinglePost";
 import Contact from "./pages/Contact";
@@ -37,9 +37,9 @@ import Footer from "./components/Footer";
 import Toast from "./components/Toast";
 import Modal from "./components/Modal";
 import ThemeApplier from "./components/ThemeApplier";
+import ScrollToTop from "./components/ScrollToTop";
 
 import "./index.css";
-import ScrollToTop from "./components/ScrollToTop";
 
 store.dispatch(initializeCartThunk());
 store.dispatch(fetchSiteThunk());
@@ -53,7 +53,6 @@ if (store.getState().user.token) {
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <React.StrictMode>
   <HelmetProvider>
     <Provider store={store}>
       <Router
@@ -82,7 +81,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/blog/:slug" element={<SinglePost />} />
           <Route path="/success/:orderId" element={<Success />} />
           <Route path="/profile" element={<Profile />} />
-          {/* TEMP: wishlist testing, remove before commit */}
           <Route path="/wishlist" element={<Wishlist />} />
         </Routes>
         <Footer />
@@ -91,5 +89,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </Router>
     </Provider>
   </HelmetProvider>,
-  /* </React.StrictMode>, */
 );
