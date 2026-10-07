@@ -28,7 +28,11 @@ function headless_reset_password($request)
         return new WP_Error('key_error', 'Erreur lors de la génération du lien.', ['status' => 500]);
     }
 
-    $reset_link = "http://localhost:5173/new-password?login=" . rawurlencode($user->user_login) . "&key=" . rawurlencode($key);
+
+    $url = untrailingslashit(home_url());
+    $frontend_url = substr($url, 0, strrpos($url, '/'));
+
+    $reset_link = esc_url_raw("{$frontend_url}/new-password?login=" . rawurlencode($user->user_login) . "&key=" . rawurlencode($key));
 
 
     wp_mail(
